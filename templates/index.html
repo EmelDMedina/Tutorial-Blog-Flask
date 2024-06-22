@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-3xl font-bold mb-4">Blog Fox</h1>
+
+<form action="{{ url_for('add_post') }}" method="post" class="mb-4">
+  <input
+    type="text"
+    name="title"
+    placeholder="Title"
+    class="border p-2 w-full mb-2"
+  />
+  <textarea
+    name="content"
+    placeholder="Content"
+    class="border p-2 w-full mb-2"
+  ></textarea>
+  <button type="submit" class="bg-blue-500 text-white py-2 px-4">
+    Add Post
+  </button>
+</form>
+
+<div class="space-y-4">
+  {% for post in posts %}
+  <div class="p-4 bg-white shadow rounded">
+    <h2 class="text-2xl font-semibold">
+      <a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+    </h2>
+    <p>{{ post.content }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

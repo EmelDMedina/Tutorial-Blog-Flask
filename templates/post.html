@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
+<p class="mb-4">{{ post.content }}</p>
+
+<form
+  action="{{ url_for('add_comment', post_id=post.id) }}"
+  method="post"
+  class="mb-4"
+>
+  <textarea
+    name="comment"
+    placeholder="Comment"
+    class="border p-2 w-full mb-2"
+  ></textarea>
+  <button type="submit" class="bg-blue-500 text-white py-2 px-4">
+    Add Comment
+  </button>
+</form>
+
+<div class="space-y-4">
+  {% for comment in post.comments %}
+  <div class="p-4 bg-white shadow rounded">
+    <p>{{ comment.content }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
